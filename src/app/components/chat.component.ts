@@ -6,24 +6,34 @@ import { ChatService } from '../services/chat.service'
   selector: 'app-chat',
   template: `
 
-  <div>
-    <label for="username">Username: </label>
-    <input type="text" [(ngModel)]="username" 
+  <div class="input-group">
+
+    <input class="form-control" type="text" [(ngModel)]="username" 
                        name="username">
-    <button (click)="setUsername()">Submit</button>
+    <span class="input-group-btn">
+      <button type="button" class="btn btn-secondary" (click)="setUsername()">Submit</button>
+    </span>
   </div>
+  
+  <br>
+  <hr>
   <div *ngIf="username">
-    <input type="text" placeholder="Enter Message..."
-                      [(ngModel)]="message" 
-                      name="message"
-                      (keyup.enter)="sendMessage()">
+  <h1 class="text-center">Chat</h1>
+    <input class="form-control" 
+            type="text" 
+            placeholder="Enter Message..."
+            [(ngModel)]="message" 
+            name="message"
+            (keyup.enter)="sendMessage()">
     <div *ngFor="let message of messages">
-     <strong>{{message.username}}:</strong> {{message.text}}
+    <div class="well">
+      <strong>{{message.username}}:</strong> {{message.text}}
+     </div>
     </div>
   </div><!-- ngif -->
   
   <br>
-    <div *ngIf="!username">Please Login to chat</div>
+    <div *ngIf="!username" class="text-center">Please Login to chat</div>
   `
 })
 export class ChatComponent implements OnInit, OnDestroy{
