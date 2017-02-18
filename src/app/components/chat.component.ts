@@ -5,6 +5,13 @@ import { ChatService } from '../services/chat.service'
 @Component({
   selector: 'app-chat',
   template: `
+
+  <div>
+    <label for="username">Username: </label>
+    <input type="text" [(ngModel)]="username" 
+                       name="username">
+    <button (click)="setUsername()">Submit</button>
+  </div>
   <input type="text" placeholder="Enter Message..."
                       [(ngModel)]="message" 
                       name="message"
@@ -20,6 +27,8 @@ export class ChatComponent implements OnInit, OnDestroy{
   messages: any = [];
   message: string;
   connection: any;
+  username: string;
+  alert: any = false;
 
   constructor(private _chatService: ChatService){
 
@@ -28,6 +37,11 @@ export class ChatComponent implements OnInit, OnDestroy{
   sendMessage(){
     this._chatService.sendMessage(this.message);
     this.message = '';
+  }
+
+  setUsername(){
+    this._chatService.setUsername(this.username);
+    this.alert = 'Username is set';
   }
 
   ngOnInit(){

@@ -8,6 +8,10 @@ export class ChatService {
   private url = 'http://localhost:8000';
   private socket:any;
 
+  setUsername(username:string){
+    console.log(`Username set: ${username}`)
+  }
+
   sendMessage(message:string){
     this.socket.emit('add-message', message);
   }
