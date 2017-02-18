@@ -12,15 +12,18 @@ import { ChatService } from '../services/chat.service'
                        name="username">
     <button (click)="setUsername()">Submit</button>
   </div>
-  <input type="text" placeholder="Enter Message..."
+  <div *ngIf="username">
+    <input type="text" placeholder="Enter Message..."
                       [(ngModel)]="message" 
                       name="message"
                       (keyup.enter)="sendMessage()">
-  <br>
+    <div *ngFor="let message of messages">
+     <strong>{{message.username}}:</strong> {{message.text}}
+    </div>
+  </div><!-- ngif -->
   
-  <div *ngFor="let message of messages">
-    {{message.text}}
-  </div>
+  <br>
+    <div *ngIf="!username">Please Login to chat</div>
   `
 })
 export class ChatComponent implements OnInit, OnDestroy{
@@ -35,7 +38,7 @@ export class ChatComponent implements OnInit, OnDestroy{
   }
 
   sendMessage(){
-    this._chatService.sendMessage(this.message);
+    this._chatService.sendMessage(this.message, this.username);
     this.message = '';
   }
 

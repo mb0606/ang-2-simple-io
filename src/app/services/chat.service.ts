@@ -9,11 +9,15 @@ export class ChatService {
   private socket:any;
 
   setUsername(username:string){
-    console.log(`Username set: ${username}`)
+    console.log(`Username set: ${username}`);
+    sessionStorage.setItem('username', username);
+  }
+  getUsername(){
+    return sessionStorage.getItem('username')
   }
 
-  sendMessage(message:string){
-    this.socket.emit('add-message', message);
+  sendMessage(message:string, username: string){
+    this.socket.emit('add-message', message, username);
   }
 
   getMessages(){
