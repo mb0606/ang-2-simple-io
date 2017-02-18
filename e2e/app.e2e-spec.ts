@@ -1,6 +1,6 @@
 import { ChatAng2IoPage } from './app.po';
 
-describe('chat-ang2-io App', () => {
+describe('components-ang2-io App', () => {
   let page: ChatAng2IoPage;
 
   beforeEach(() => {
